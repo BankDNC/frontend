@@ -17,8 +17,10 @@ steps:
 
 - script: |
     npm install -g @angular/cli
+  displayName: 'npm install angular'
+
+- script: |
     npm install
-    ng build --prod
   displayName: 'npm install'
 
 - script: |
