@@ -28,10 +28,9 @@ export class RegisterComponent implements OnInit {
       lastname: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
-      phone: ['', [Validators.required, Validators.minLength(5)]],
+      phone: ['', [Validators.required]],
       typeNit: ['', Validators.required],
-      nit: ['', Validators.required],
-      check: ['', Validators.required],
+      nit: ['', Validators.required]
     });
   }
 
@@ -41,13 +40,14 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    console.log(this.user.value);
+    
 
     if (this.user.invalid) {
       return;
     }
 
-    alert('Mensaje Enviado !');
+    console.log(this.user.value);
+    this.userService.registerUser(this.user.value);
   }
 
   checked() {
