@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { RegisterComponent } from 'src/app/components/register/register.component';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +8,6 @@ import { RegisterComponent } from 'src/app/components/register/register.componen
 export class AppComponent {
   title = 'bank-frontend';
 
-  constructor(private modalService: NgbModal) { }
+  constructor() { }
 
-  openRegister() {
-    const modalRef = this.modalService.open(RegisterComponent, { size: 'xl', centered: true });
-  }
 }
