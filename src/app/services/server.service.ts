@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ServerService {
 
-  private apiUrl:string = '/api/status';
+  private apiUrl:string = 'https://dncbankbackend.azurewebsites.net/api/status';
 
   constructor(
     private http: HttpClient
