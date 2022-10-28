@@ -15,6 +15,5 @@ export class ServerService {
   statusServer() {
     let result = this.http.get(this.apiUrl);
     return result;
-    
   }
 }

@@ -1,17 +1,20 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { UserDTO, UserResponse } from '../models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+
+  private apiUrl = '/api/v1/user';
   
   constructor(
     private http: HttpClient
   ) { }
 
-  registerUser(value: any) {
-    throw new Error('Method not implemented.');
+  registerUser(dto: UserDTO) {
+    return this.http.post<UserResponse>(`${this.apiUrl}/register`, dto);
   }
   
 }

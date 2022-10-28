@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserDTO } from 'src/app/models/user.model';
 //models
 
 //services
@@ -25,7 +26,7 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.formBuilder.group({
       name: ['', Validators.required],
-      lastname: ['', Validators.required],
+      lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(8)]],
       phone: ['', [Validators.required]],
@@ -47,7 +48,27 @@ export class RegisterComponent implements OnInit {
     }
 
     console.log(this.user.value);
-    this.userService.registerUser(this.user.value);
+    this.userService.registerUser(this.mapUserDto()).subscribe(
+      (data) => {
+        console.log('created',data);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  mapUserDto() : UserDTO{
+    let userDto: UserDTO = {
+      name: this.user.value.name,
+      lastName: this.user.value.lastName,
+      email: this.user.value.email,
+      password: this.user.value.password,
+      phone: this.user.value.phone,
+      typeNit: this.user.value.typeNit,
+      nit: this.user.value.nit
+    }
+    return userDto;
   }
 
   checked() {

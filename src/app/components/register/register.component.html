@@ -12,10 +12,11 @@
 
     <div class="form-group col-md-6">
       <label>Apellidos</label>
-      <input type="text" formControlName="lastname" class="form-control"
-        [ngClass]="{ 'is-invalid': submitted && f['lastname'].errors }" />
-      <div *ngIf="submitted && f['lastname'].errors" class="invalid-feedback">
-        <div *ngIf="f['lastname'].errors">Por favor, ingresa tus Nombres</div>
+      <input type="text" formControlName="lastName" class="form-control"
+        [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }" />
+      <div *ngIf="submitted && f['lastName'].errors" class="invalid-feedback">
+        <div *ngIf="f['lastName'].errors">Por favor, ingresa tus apellidos
+        </div>
       </div>
     </div>
 
@@ -82,7 +83,7 @@
       </div>
     </div>
     <div class="form-group">
-      <button [disabled]="isChecked" class="btn btn-primary" (click)="onSubmit()">Aceptar</button>
+      <button [disabled]="isChecked" class="btn btn-primary">Aceptar</button>
     </div>
   </form>
 </div>
