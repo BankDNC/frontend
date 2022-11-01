@@ -7,7 +7,7 @@ import { UserDTO, UserResponse } from '../models/user.model';
 })
 export class UserService {
 
-  private apiUrl = 'http://dncbankbackend.azurewebsites.net/api/v1/user';
+  private apiUrl = 'https://dncbankbackend.azurewebsites.net/api/v1/user';
   
   constructor(
     private http: HttpClient
