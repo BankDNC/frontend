@@ -18,10 +18,10 @@ export class ServerComponent implements OnInit {
   }
 
   checkHealt(){
-    this.service.statusServer().subscribe(
-      () => this.show = true,
-      () => this.show = false
-    );
+    this.service.statusServer().subscribe({
+      next: () => this.show = true,
+      error: () => this.show = false
+    });
   }
 
 }

@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { UserDTO } from 'src/app/models/user.model';
-//models
 
-//services
+// Models
+import { UserDTO } from 'src/app/models/user.model';
+
+// Services
 import { UserService } from '../../services/user.service';
+import { Router } from '@angular/router';
+
+// Others
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -19,8 +24,9 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private formBuilder: FormBuilder
-  ) {}
+    private formBuilder: FormBuilder,
+    private router: Router
+  ) { }
 
   // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngOnInit(): void {
@@ -41,24 +47,18 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     this.submitted = true;
-    
+
 
     if (this.user.invalid) {
       return;
     }
-
-    console.log(this.user.value);
-    this.userService.registerUser(this.mapUserDto()).subscribe(
-      (data) => {
-        console.log('created',data);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    this.userService.registerUser(this.mapUserDto()).subscribe({
+        next: () => this.registerSuccess(),
+        error: () => this.registerError()
+      });
   }
 
-  mapUserDto() : UserDTO{
+  mapUserDto(): UserDTO {
     let userDto: UserDTO = {
       name: this.user.value.name,
       lastName: this.user.value.lastName,
@@ -73,5 +73,29 @@ export class RegisterComponent implements OnInit {
 
   checked() {
     this.isChecked = !this.isChecked;
+  }
+
+  registerError() {
+    Swal.fire({
+      title: 'Error!',
+      text: 'Datos incorrectos o servicio no esta disponible',
+      icon: 'error',
+      confirmButtonText: 'Ok'
+    });
+  }
+
+  registerSuccess() {
+    let alert = Swal.fire({
+      title: 'Register',
+      text: 'Registro exitoso',
+      icon: 'success',
+      confirmButtonText: 'Ok'
+    });
+
+    alert.then((result) => {
+      if (result.isConfirmed) {
+        this.router.navigate(['']);
+      }
+    });
   }
 }
