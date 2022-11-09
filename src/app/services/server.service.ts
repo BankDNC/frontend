@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ServerService {
 
-  private apiUrl:string = 'https://dncbankbackend.azurewebsites.net/api/status';
+  private apiUrl:string = `${environment.API_URL}/api/status`;
 
   constructor(
     private http: HttpClient
