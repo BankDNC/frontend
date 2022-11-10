@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if(!this.tokenService.getToken()){
+    if(!this.tokenService.validToken()) {
       this.router.navigate(['']);
     }
   }

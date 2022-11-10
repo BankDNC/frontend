@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 
 // Others
 import Swal from 'sweetalert2';
+import { msgError } from 'src/app/models/error.model';
 
 @Component({
   selector: 'app-register',
@@ -54,7 +55,7 @@ export class RegisterComponent implements OnInit {
     }
     this.userService.registerUser(this.mapUserDto()).subscribe({
         next: () => this.registerSuccess(),
-        error: () => this.registerError()
+        error: (error) => this.registerError(error.error)
       });
   }
 
@@ -75,10 +76,10 @@ export class RegisterComponent implements OnInit {
     this.isChecked = !this.isChecked;
   }
 
-  registerError() {
+  registerError(error : msgError) {
     Swal.fire({
       title: 'Error!',
-      text: 'Datos incorrectos o servicio no esta disponible',
+      text: error.message,
       icon: 'error',
       confirmButtonText: 'Ok'
     });
