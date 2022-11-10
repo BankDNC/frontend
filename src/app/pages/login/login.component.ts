@@ -5,6 +5,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 
+//models
+import { msgError } from '../../models/error.model';
+
 // Others
 import Swal from 'sweetalert2';
 
@@ -44,7 +47,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.user.value.email, this.user.value.password)
       .subscribe({
         next: () => this.loginSuccess(),
-        error: () => this.loginError()
+        error: (error) => this.loginError(error.error)
       });
   }
 
@@ -63,10 +66,10 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  loginError() {
+  loginError(error : msgError) {
     Swal.fire({
       title: 'Error!',
-      text: 'Correo o credenciales invalidas',
+      text: error.message,
       icon: 'error',
       confirmButtonText: 'Ok'
     });
