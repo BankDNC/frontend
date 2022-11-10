@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  API_URL: 'https://dnc-backend-bank.herokuapp.com'
+  API_URL: 'https://backend-production-6c43.up.railway.app'
 };
